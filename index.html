@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tint Nation Gurus | Window Tint · Wraps · PPF | Raleigh, NC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tng-styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="showPage('home')">
+      <img src="https://static.wixstatic.com/media/f9c684_6cced2cf81c744149a9a068015303ec9~mv2.png/v1/fill/w_209,h_209,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/TNG-LogoGoldText-WHITE.png" alt="Tint Nation Gurus" class="nav-logo-img">
+    </div>
+    <ul class="nav-links">
+      <li><button onclick="showPage('home')" id="nav-home" class="active">Home</button></li>
+      <li><button onclick="showPage('services')" id="nav-services">Services</button></li>
+      <li><button onclick="showPage('about')" id="nav-about">About</button></li>
+      <li><button onclick="showPage('contact')" id="nav-contact">Contact</button></li>
+      <li><button onclick="showPage('contact')" class="nav-cta">Book Now</button></li>
+    </ul>
+    <div class="nav-phone-wrap">
+      <a href="tel:9192700371" class="nav-phone">📞 919-270-0371</a>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <button onclick="showPage('home')" id="mob-home" class="active">Home</button>
+  <button onclick="showPage('services')" id="mob-services">Services</button>
+  <button onclick="showPage('about')" id="mob-about">About</button>
+  <button onclick="showPage('contact')" id="mob-contact">Contact</button>
+  <button onclick="showPage('contact')" class="mob-cta">Book Now</button>
+</div>
+
+<!-- ═══════════ HOME ═══════════ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-carbon"></div>
+    <div class="hero-overlay"></div>
+    <img src="images/car stock image.jpg" alt="Tint Nation Gurus" class="hero-bg-img">
+    <div class="hero-content">
+      <div class="hero-eyebrow">✦ Raleigh, NC · Mon–Sun 8am–9pm</div>
+      <h1>ELEVATE YOUR<br><em>RIDE.</em></h1>
+      <p>Premium window tinting, vehicle wraps, paint protection film, ceramic coating, and custom lighting. Raleigh's most trusted automotive restyling studio.</p>
+      <div class="hero-btns">
+        <button class="btn-gold" onclick="showPage('contact')">Book a Service ✦</button>
+        <a href="tel:9192700371" class="btn-ghost">Call Malik: 919-270-0371</a>
+      </div>
+      <div class="hero-tags">
+        <span class="htag">🪟 Window Tint</span>
+        <span class="htag">🎨 Vehicle Wraps</span>
+        <span class="htag">🛡️ Paint Protection</span>
+        <span class="htag">✨ Ceramic Coating</span>
+        <span class="htag">💡 Custom Lighting</span>
+      </div>
+    </div>
+    <div class="hero-stripe"></div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="si-num">5★</div>
+        <div class="si-label">Rated</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <div class="si-num">7</div>
+        <div class="si-label">Days a Week</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <div class="si-num">8AM–9PM</div>
+        <div class="si-label">Extended Hours</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <div class="si-num">100%</div>
+        <div class="si-label">Custom Quotes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOOGLE REVIEWS BADGE -->
+  <div class="g-reviews-bar">
+    <a href="https://www.google.com/search?sca_esv=1e191da9c85b6632&rlz=1C1VDKB_enUS1121US1121&sxsrf=ANbL-n49R8TEMUZAGRtqAvPoehkaA2oG1Q:1780517628800&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOaolfWFHoDxOjL6Uhcm9SRvf6LeojzHHtk0Ebt8F2x6OXP72m6WDGxmgJPFVqFybBKwHur9V7D6giQU1qtuDMRwUtaAPu9Vmu6qXESy9tmjeY3PksA%3D%3D&q=Tint+Nation+Gurus+Reviews&sa=X&ved=2ahUKEwjDrJ-G8euUAxXfGVkFHd6QN_0Q0bkNegQIKhAH&biw=958&bih=944&dpr=1" target="_blank" rel="noopener" class="g-reviews-link">
+      <svg class="g-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="28" height="28">
+        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/>
+        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.58-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        <path fill="none" d="M0 0h48v48H0z"/>
+      </svg>
+      <div class="g-reviews-text">
+        <span class="g-reviews-title">Google Reviews</span>
+        <div class="g-stars">
+          <span class="g-star">★</span><span class="g-star">★</span><span class="g-star">★</span><span class="g-star">★</span><span class="g-star">★</span>
+          <span class="g-rating">5.0</span>
+        </div>
+      </div>
+      <span class="g-reviews-cta">Read Our Reviews →</span>
+    </a>
+  </div>
+
+  <!-- SERVICES SECTION -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-tag">What We Do</div>
+      <h2 class="section-h">Expert Services.<br><em>Exceptional Results.</em></h2>
+      <p class="section-p">From the glass on your vehicle to the paint on your hood — we use industry-leading technology to protect and elevate every build.</p>
+      <div class="services-grid">
+        <div class="svc-card" onclick="showPage('services')">
+          <div class="svc-img-wrap">
+            <img src="images/window tinting.jpg" alt="Window Tinting" class="svc-img">
+            <div class="svc-overlay">View Service →</div>
+          </div>
+          <div class="svc-body">
+            <div class="svc-num">01</div>
+            <h3>Window Tinting</h3>
+            <p>Auto, residential & commercial. Advanced carbon and ceramic films for UV protection, heat rejection, and privacy.</p>
+            <span class="svc-tag">Auto · Residential · Commercial</span>
+          </div>
+        </div>
+        <div class="svc-card" onclick="showPage('services')">
+          <div class="svc-img-wrap">
+            <img src="images/car wrap.jpg" alt="Vehicle Wraps" class="svc-img">
+            <div class="svc-overlay">View Service →</div>
+          </div>
+          <div class="svc-body">
+            <div class="svc-num">02</div>
+            <h3>Vehicle Wraps</h3>
+            <p>Full, partial, and spray wraps for a factory-quality, reversible color change. Make it yours.</p>
+            <span class="svc-tag">Full · Partial · Spray</span>
+          </div>
+        </div>
+        <div class="svc-card" onclick="showPage('services')">
+          <div class="svc-img-wrap">
+            <img src="images/protection film.jpg" alt="Paint Protection Film" class="svc-img">
+            <div class="svc-overlay">View Service →</div>
+          </div>
+          <div class="svc-body">
+            <div class="svc-num">03</div>
+            <h3>Paint Protection Film</h3>
+            <p>Industry-leading PPF that guards against road debris, chips, and scratches. Protect your investment.</p>
+            <span class="svc-tag">Full Body · Partial · Spot</span>
+          </div>
+        </div>
+        <div class="svc-card" onclick="showPage('services')">
+          <div class="svc-img-wrap">
+            <img src="images/ceramic coating.jpg" alt="Ceramic Coating" class="svc-img">
+            <div class="svc-overlay">View Service →</div>
+          </div>
+          <div class="svc-body">
+            <div class="svc-num">04</div>
+            <h3>Ceramic Coating</h3>
+            <p>"Guru Gloss" finish with 5+ years of hydrophobic durability. The deepest, cleanest shine on the road.</p>
+            <span class="svc-tag">Cars · Trucks · Exotics</span>
+          </div>
+        </div>
+        <div class="svc-card" onclick="showPage('services')">
+          <div class="svc-img-wrap">
+            <img src="images/custom lightning.webp" alt="Custom Lighting" class="svc-img">
+            <div class="svc-overlay">View Service →</div>
+          </div>
+          <div class="svc-body">
+            <div class="svc-num">05</div>
+            <h3>Custom Lighting</h3>
+            <p>Ambient interior lighting and headlight restoration upgrades for enhanced visibility and aesthetics.</p>
+            <span class="svc-tag">Interior · Headlights · Custom</span>
+          </div>
+        </div>
+        <div class="svc-card academy-card" onclick="showPage('about')">
+          <div class="svc-img-wrap">
+            <img src="images/tint nation training.jpg" alt="Tint Nation Academy" class="svc-img">
+            <div class="svc-overlay">Learn More →</div>
+          </div>
+          <div class="svc-body">
+            <div class="svc-num academy-num">ACADEMY</div>
+            <h3>Tint Nation Academy</h3>
+            <p>Train like a student. Graduate a Guru. Hands-on courses that turn beginners into high-earning restyling professionals.</p>
+            <span class="svc-tag academy-tag">Courses · Mentorship · Career</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY TNG -->
+  <section class="why-section">
+    <div class="why-inner">
+      <div class="why-text">
+        <div class="section-tag">Why Choose Us</div>
+        <h2 class="section-h" style="color:var(--white)">The Best Window<br><em>Tinter In The Game.</em></h2>
+        <p style="color:var(--text-soft);margin-top:1rem;line-height:1.8">Fast, friendly, and top-quality — Tint Nation Gurus is Raleigh's go-to shop for anyone serious about their vehicle. Malik and the team bring precision to every install.</p>
+        <div class="why-list">
+          <div class="why-row"><div class="wcheck">✓</div><span>Premium carbon & ceramic film brands</span></div>
+          <div class="why-row"><div class="wcheck">✓</div><span>Auto, residential & commercial tinting</span></div>
+          <div class="why-row"><div class="wcheck">✓</div><span>Extended hours — Mon through Sun</span></div>
+          <div class="why-row"><div class="wcheck">✓</div><span>Custom quotes, no pressure</span></div>
+          <div class="why-row"><div class="wcheck">✓</div><span>5-star rated across all platforms</span></div>
+          <div class="why-row"><div class="wcheck">✓</div><span>Lifetime warranty on select services</span></div>
+        </div>
+        <button class="btn-gold" style="margin-top:2rem" onclick="showPage('contact')">Book Your Appointment →</button>
+      </div>
+      <div class="why-img-col">
+        <img src="https://static.wixstatic.com/media/f9c684_6b2fb39969034cf1bd1f01a962eb4383~mv2.png/v1/fill/w_639,h_828,al_c,q_90,enc_avif,quality_auto/NewServicesWarranty.png" alt="TNG Services & Warranty" class="why-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS + LOCATION -->
+  <section class="section info-section">
+    <div class="section-inner info-grid">
+      <div class="info-card">
+        <div class="info-icon">📍</div>
+        <h3>Location</h3>
+        <p>1819 E. Millbrook Road<br>Raleigh, NC 27609</p>
+        <a href="https://maps.google.com/?q=1819+E+Millbrook+Rd+Raleigh+NC" target="_blank" class="info-link">Get Directions →</a>
+      </div>
+      <div class="info-card info-card-featured">
+        <div class="info-icon">📞</div>
+        <h3>Book With Malik</h3>
+        <p>Call or text for your custom quote. Fast response, no waiting.</p>
+        <a href="tel:9192700371" class="btn-gold" style="margin-top:1rem;display:inline-flex">Call: 919-270-0371</a>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🕐</div>
+        <h3>Hours</h3>
+        <p>Monday – Sunday<br>8:00 AM – 9:00 PM</p>
+        <span class="info-badge">Extended Hours</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">📸</div>
+        <h3>Follow Us</h3>
+        <p>See the latest builds, installs, and drops on Instagram.</p>
+        <a href="https://www.instagram.com/tintnationgurus/" target="_blank" class="info-link">@tintnationgurus →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq-section">
+    <div class="section-inner">
+      <div class="section-tag">FAQ</div>
+      <h2 class="section-h">Frequently Asked<br><em>Questions.</em></h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Do I receive certification?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Yes. Each completed course includes a professional certification.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Are tools included?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Most programs include a starter toolkit or equipment guidance list.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Can I learn this in 2–3 days?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Yes. Our high-intensity, hands-on approach prepares you for real installs immediately.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Do I need prior experience?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">No. Beginner-friendly courses are available.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Can I start my own business after?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Yes — many graduates launch their own shops or mobile services.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner">
+    <div class="cta-banner-inner">
+      <div class="cta-carbon"></div>
+      <h2>Ready to Elevate<br><em>Your Ride?</em></h2>
+      <p>Call or text Malik for a custom quote. Fast, friendly, and built to impress.</p>
+      <div class="cta-btns">
+        <button class="btn-gold" onclick="showPage('contact')">Book a Service ✦</button>
+        <a href="tel:9192700371" class="btn-ghost">📞 919-270-0371</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="https://static.wixstatic.com/media/f9c684_6cced2cf81c744149a9a068015303ec9~mv2.png/v1/fill/w_209,h_209,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/TNG-LogoGoldText-WHITE.png" alt="TNG" class="footer-logo">
+        <p class="footer-tagline">Raleigh's most trusted automotive restyling studio. Window tint, wraps, PPF, ceramic coating, and custom lighting.</p>
+        <a href="https://www.instagram.com/tintnationgurus/" target="_blank" class="footer-social">Instagram</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Pages</div>
+        <ul class="footer-links">
+          <li><button onclick="showPage('home')">Home</button></li>
+          <li><button onclick="showPage('services')">Services</button></li>
+          <li><button onclick="showPage('about')">About</button></li>
+          <li><button onclick="showPage('contact')">Contact / Book</button></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><button onclick="showPage('services')">Window Tinting</button></li>
+          <li><button onclick="showPage('services')">Vehicle Wraps</button></li>
+          <li><button onclick="showPage('services')">Paint Protection Film</button></li>
+          <li><button onclick="showPage('services')">Ceramic Coating</button></li>
+          <li><button onclick="showPage('services')">Custom Lighting</button></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:9192700371">919-270-0371</a></li>
+          <li><span>1819 E. Millbrook Rd</span></li>
+          <li><span>Raleigh, NC 27609</span></li>
+          <li><span>Mon–Sun: 8am–9pm</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Tint Nation Gurus · Raleigh, NC</span>
+      <span>Fast · Friendly · Top Quality</span>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<div id="page-services" class="page">
+
+  <div class="page-hero">
+    <div class="page-hero-carbon"></div>
+    <div class="page-hero-content">
+      <div class="section-tag">Our Services</div>
+      <h1 class="page-h1">Expert Services.<br><em>Exceptional Results.</em></h1>
+      <p class="page-sub">Premium enhancements designed to protect your investment and elevate your aesthetic. We use industry-leading technology on every build.</p>
+    </div>
+    <div class="page-hero-stripe"></div>
+  </div>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="sd-list-wrap">
+
+        <div class="sd-item">
+          <div class="sd-content">
+            <div class="sd-num">01</div>
+            <h3>Window Tinting</h3>
+            <p>Professional window tinting for auto, residential, and commercial clients. We utilize advanced carbon and ceramic films to provide superior UV protection, heat rejection, and privacy for your vehicle, home, or office. Every install is precision-cut and bubble-free.</p>
+            <ul class="sd-bullets">
+              <li>Automotive — sedans, trucks, SUVs, exotics</li>
+              <li>Residential — homes, offices, storefronts</li>
+              <li>Commercial — retail, warehouses, buildings</li>
+              <li>Carbon and ceramic film options</li>
+              <li>UV protection & heat rejection</li>
+              <li>NC legal tint levels available</li>
+            </ul>
+          </div>
+          <div class="sd-visual">
+            <img src="images/window tinting.jpg" alt="Window Tinting" class="sd-img">
+          </div>
+        </div>
+
+        <div class="sd-item sd-reverse">
+          <div class="sd-content">
+            <div class="sd-num">02</div>
+            <h3>Vehicle Wraps & Customization</h3>
+            <p>Full and partial vinyl vehicle wraps and seamless spray vehicle wraps for a factory-quality, reversible color change. Transform your vehicle completely — or add accents and custom graphics that make it uniquely yours.</p>
+            <ul class="sd-bullets">
+              <li>Full vehicle color change wraps</li>
+              <li>Partial wraps & accent pieces</li>
+              <li>Spray vehicle wraps</li>
+              <li>Custom graphics & decals</li>
+              <li>Gloss, matte, satin & chrome finishes</li>
+              <li>Fully reversible — protects factory paint</li>
+            </ul>
+          </div>
+          <div class="sd-visual">
+            <img src="images/car wrap.jpg" alt="Vehicle Wraps" class="sd-img">
+          </div>
+        </div>
+
+        <div class="sd-item">
+          <div class="sd-content">
+            <div class="sd-num">03</div>
+            <h3>Paint Protection Film (PPF)</h3>
+            <p>Industry-leading paint protection film guards against road debris, chips, scratches, and environmental damage. Invisible protection that keeps your paint looking showroom-fresh for years.</p>
+            <ul class="sd-bullets">
+              <li>Full body protection packages</li>
+              <li>Partial coverage — hood, bumper, mirrors</li>
+              <li>Self-healing film technology</li>
+              <li>Maintains factory paint finish</li>
+              <li>Protects resale value</li>
+              <li>Crystal clear and virtually invisible</li>
+            </ul>
+          </div>
+          <div class="sd-visual">
+            <img src="images/protection film.jpg" alt="Paint Protection Film" class="sd-img">
+          </div>
+        </div>
+
+        <div class="sd-item sd-reverse">
+          <div class="sd-content">
+            <div class="sd-num">04</div>
+            <h3>Ceramic Coating</h3>
+            <p>Our professional-grade ceramic coating delivers the "Guru Gloss" finish — over five years of hydrophobic durability that repels water, dirt, and UV damage while giving your vehicle the deepest, most reflective shine on the road.</p>
+            <ul class="sd-bullets">
+              <li>5+ years of protection</li>
+              <li>Hydrophobic water-repelling technology</li>
+              <li>"Guru Gloss" deep shine finish</li>
+              <li>UV and oxidation protection</li>
+              <li>Cars, trucks, SUVs & exotics</li>
+              <li>Maintenance packages available</li>
+            </ul>
+          </div>
+          <div class="sd-visual">
+            <img src="images/ceramic coating.jpg" alt="Ceramic Coating" class="sd-img">
+          </div>
+        </div>
+
+        <div class="sd-item">
+          <div class="sd-content">
+            <div class="sd-num">05</div>
+            <h3>Lighting & Visibility Upgrades</h3>
+            <p>Enhance your driving experience and make your vehicle stand out with custom ambient lighting installations and professional headlight restoration. Better visibility. Better style.</p>
+            <ul class="sd-bullets">
+              <li>Custom interior ambient lighting</li>
+              <li>Headlight restoration & polishing</li>
+              <li>LED lighting upgrades</li>
+              <li>Color-matched accent lighting</li>
+              <li>Improved nighttime visibility</li>
+            </ul>
+          </div>
+          <div class="sd-visual">
+            <img src="images/custom lightning.webp" alt="Custom Lighting" class="sd-img">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <div class="cta-banner-inner">
+      <div class="cta-carbon"></div>
+      <h2>Custom Quote for<br><em>Your Vehicle</em></h2>
+      <p>Every vehicle is different. Call or text Malik and we'll build a package around your exact needs and budget.</p>
+      <div class="cta-btns">
+        <button class="btn-gold" onclick="showPage('contact')">Request a Quote ✦</button>
+        <a href="tel:9192700371" class="btn-ghost">📞 Call Malik</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="https://static.wixstatic.com/media/f9c684_6cced2cf81c744149a9a068015303ec9~mv2.png/v1/fill/w_209,h_209,al_c,q_85,enc_avif/TNG-LogoGoldText-WHITE.png" alt="TNG" class="footer-logo">
+        <p class="footer-tagline">Raleigh's most trusted automotive restyling studio.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Pages</div>
+        <ul class="footer-links">
+          <li><button onclick="showPage('home')">Home</button></li>
+          <li><button onclick="showPage('services')">Services</button></li>
+          <li><button onclick="showPage('about')">About</button></li>
+          <li><button onclick="showPage('contact')">Contact</button></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:9192700371">919-270-0371</a></li>
+          <li><span>1819 E. Millbrook Rd, Raleigh NC</span></li>
+          <li><span>Mon–Sun 8am–9pm</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 Tint Nation Gurus · Raleigh, NC</span></div>
+  </footer>
+
+</div>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<div id="page-about" class="page">
+
+  <div class="page-hero">
+    <div class="page-hero-carbon"></div>
+    <div class="page-hero-content">
+      <div class="section-tag">About Us</div>
+      <h1 class="page-h1">Train Like a Student.<br><em>Graduate a Guru.</em></h1>
+      <p class="page-sub">Tint Nation Gurus is more than a shop — it's a standard of excellence in automotive restyling and a movement built on mastery.</p>
+    </div>
+    <div class="page-hero-stripe"></div>
+  </div>
+
+  <section class="section about-section">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text">
+          <div class="section-tag">The Story</div>
+          <h2 class="about-h2">Built on Precision.<br><em>Driven by Excellence.</em></h2>
+          <p>Tint Nation Gurus started with one mission — deliver premium automotive restyling services that actually match the quality of the vehicles we work on. From the first tint job to a full ceramic-coated exotic, the standard has never changed.</p>
+          <p>Located at 1819 E. Millbrook Road in Raleigh, NC, we've built a reputation as the most trusted shop in the area for window tinting, vehicle wraps, paint protection, ceramic coating, and custom lighting — all under one roof, with extended hours seven days a week.</p>
+          <p>Malik and the team bring precision, passion, and professionalism to every single build. When you book with Tint Nation Gurus, you're not getting a quick job — you're getting a craft.</p>
+          <div class="about-stats">
+            <div class="astat">
+              <div class="astat-num">5★</div>
+              <div class="astat-label">Rated</div>
+            </div>
+            <div class="astat">
+              <div class="astat-num">7</div>
+              <div class="astat-label">Days a Week</div>
+            </div>
+            <div class="astat">
+              <div class="astat-num">5+</div>
+              <div class="astat-label">Services Offered</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACADEMY -->
+  <section class="academy-section">
+    <div class="section-inner">
+      <div class="academy-grid">
+        <div class="academy-visual">
+          <img src="https://static.wixstatic.com/media/f9c684_e4d6dd727a7e4b3985a0ebce87aeab8f~mv2.png/v1/crop/x_0,y_0,w_1080,h_983/fill/w_540,h_490,al_c,q_90/TNG%20hands%20on%20class.png" alt="Tint Nation Academy" class="academy-img">
+        </div>
+        <div class="academy-text">
+          <div class="section-tag academy-tag-label">Tint Nation Academy</div>
+          <h2 class="section-h" style="color:var(--white)">Turn a Skill Into<br><em>a Career.</em></h2>
+          <p style="color:var(--text-soft);margin-top:1rem;line-height:1.8">Tint Nation Academy is more than a training facility — it's where careers are built and futures are transformed. Our hands-on, professional courses take you from beginner to high-earning restyling professional through real-world, in-shop training.</p>
+          <div class="academy-features">
+            <div class="af-item"><span class="af-icon">🎓</span>Hands-on in-shop training</div>
+            <div class="af-item"><span class="af-icon">🤝</span>Ongoing mentorship</div>
+            <div class="af-item"><span class="af-icon">📈</span>Business guidance</div>
+            <div class="af-item"><span class="af-icon">⚙️</span>Industry-sponsored materials</div>
+            <div class="af-item"><span class="af-icon">💰</span>High-income skill development</div>
+            <div class="af-item"><span class="af-icon">🏆</span>Real-time feedback</div>
+          </div>
+          <a href="https://www.instagram.com/tintnationgurus/" target="_blank" rel="noopener" class="btn-gold" style="margin-top:2rem;display:inline-flex">Inquire About Enrollment →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <div class="cta-banner-inner">
+      <div class="cta-carbon"></div>
+      <h2>Ready to Book?</h2>
+      <p>Call or text Malik directly for your custom quote. Fast response, extended hours, no waiting.</p>
+      <div class="cta-btns">
+        <button class="btn-gold" onclick="showPage('contact')">Book a Service ✦</button>
+        <a href="tel:9192700371" class="btn-ghost">📞 919-270-0371</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="https://static.wixstatic.com/media/f9c684_6cced2cf81c744149a9a068015303ec9~mv2.png/v1/fill/w_209,h_209,al_c,q_85,enc_avif/TNG-LogoGoldText-WHITE.png" alt="TNG" class="footer-logo">
+        <p class="footer-tagline">Raleigh's most trusted automotive restyling studio.</p>
+        <a href="https://www.instagram.com/tintnationgurus/" target="_blank" class="footer-social">Instagram</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Pages</div>
+        <ul class="footer-links">
+          <li><button onclick="showPage('home')">Home</button></li>
+          <li><button onclick="showPage('services')">Services</button></li>
+          <li><button onclick="showPage('about')">About</button></li>
+          <li><button onclick="showPage('contact')">Contact</button></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:9192700371">919-270-0371</a></li>
+          <li><span>1819 E. Millbrook Rd, Raleigh NC</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 Tint Nation Gurus · Raleigh, NC</span></div>
+  </footer>
+
+</div>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<div id="page-contact" class="page">
+
+  <div class="page-hero">
+    <div class="page-hero-carbon"></div>
+    <div class="page-hero-content">
+      <div class="section-tag">Book a Service</div>
+      <h1 class="page-h1">Let's Build<br><em>Your Vision.</em></h1>
+      <p class="page-sub">Call or text Malik directly for the fastest response. Or fill out the form below and we'll get back to you with a custom quote.</p>
+    </div>
+    <div class="page-hero-stripe"></div>
+  </div>
+
+  <section class="contact-section">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <h2>Get In <em>Touch.</em></h2>
+        <p>Every vehicle is different — we build custom quotes based on your exact make, model, and goals. Reach out and let's talk.</p>
+        <div class="contact-cards">
+          <a href="tel:9192700371" class="ccard ccard-featured">
+            <div class="cc-icon">📞</div>
+            <div>
+              <div class="cc-label">Call or Text Malik</div>
+              <div class="cc-val">919-270-0371</div>
+              <div class="cc-sub">Fastest way to get a quote</div>
+            </div>
+          </a>
+          <div class="ccard">
+            <div class="cc-icon">📍</div>
+            <div>
+              <div class="cc-label">Location</div>
+              <div class="cc-val">1819 E. Millbrook Road<br>Raleigh, NC 27609</div>
+            </div>
+          </div>
+          <div class="ccard">
+            <div class="cc-icon">🕐</div>
+            <div>
+              <div class="cc-label">Hours</div>
+              <div class="cc-val">Mon – Sun: 8AM – 9PM</div>
+            </div>
+          </div>
+          <a href="https://www.instagram.com/tintnationgurus/" target="_blank" class="ccard">
+            <div class="cc-icon">📸</div>
+            <div>
+              <div class="cc-label">Instagram</div>
+              <div class="cc-val">@tintnationgurus</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form-card">
+        <h3>Request a Custom Quote</h3>
+        <form id="contact-form" onsubmit="handleContactSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" name="first_name" placeholder="Jordan" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" name="last_name" placeholder="Smith" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" name="phone" placeholder="(919) 000-0000" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="jordan@email.com" required>
+          </div>
+          <div class="form-group">
+            <label>What service are you requesting?</label>
+            <select name="service">
+              <option value="">Select a service...</option>
+              <option>Window Tint</option>
+              <option>Ceramic Coating</option>
+              <option>Vehicle Wraps</option>
+              <option>Paint Protection Film</option>
+              <option>Custom Lighting</option>
+              <option>Buffing / Polish</option>
+              <option>Multiple Services / Bundle</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Vehicle Year / Make / Model</label>
+            <input type="text" name="vehicle" placeholder="e.g. 2022 Honda Accord — or N/A if not an auto service" required>
+          </div>
+          <div class="form-group">
+            <label>Provide a description of the services needed</label>
+            <textarea name="message" placeholder="Any specific details about your vehicle, what you're looking for, timeline, or questions..."></textarea>
+          </div>
+          <button type="submit" class="btn-gold form-btn">Send Request ✦</button>
+          <div id="contact-success" class="form-success" style="display:none">✦ Request sent! Malik will be in touch with your custom quote shortly.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <div class="map-wrap">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3232.5!2d-78.6382!3d35.8385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89ac5a2f8b2c0001%3A0x0!2s1819+E+Millbrook+Rd%2C+Raleigh%2C+NC+27609!5e0!3m2!1sen!2sus!4v1600000000000" width="100%" height="360" style="border:0" allowfullscreen loading="lazy" title="Tint Nation Gurus Location"></iframe>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="https://static.wixstatic.com/media/f9c684_6cced2cf81c744149a9a068015303ec9~mv2.png/v1/fill/w_209,h_209,al_c,q_85,enc_avif/TNG-LogoGoldText-WHITE.png" alt="TNG" class="footer-logo">
+        <p class="footer-tagline">Raleigh's most trusted automotive restyling studio.</p>
+        <a href="https://www.instagram.com/tintnationgurus/" target="_blank" class="footer-social">Instagram</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Pages</div>
+        <ul class="footer-links">
+          <li><button onclick="showPage('home')">Home</button></li>
+          <li><button onclick="showPage('services')">Services</button></li>
+          <li><button onclick="showPage('about')">About</button></li>
+          <li><button onclick="showPage('contact')">Contact</button></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:9192700371">919-270-0371</a></li>
+          <li><span>1819 E. Millbrook Rd</span></li>
+          <li><span>Raleigh, NC 27609</span></li>
+          <li><span>Mon–Sun: 8am–9pm</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Tint Nation Gurus · Raleigh, NC</span>
+      <span>Fast · Friendly · Top Quality</span>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Sticky buttons -->
+<a href="tel:9192700371" class="phone-sticky">📞 Call Malik</a>
+<a href="sms:9192700371" class="sms-sticky">🚗 Text Us</a>
+
+<script src="tng-main.js"></script>
+</body>
+</html>
