@@ -1,763 +1,1013 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tint Nation Gurus | Window Tint · Wraps · PPF | Raleigh, NC</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="tng-styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tint Nation Gurus | Window Tinting NC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/motion@11.11.17/dist/motion.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#080808;
+  --black-2:#111;
+  --yellow:#F5C400;
+  --yellow-dk:#D4A800;
+  --white:#F0F0F0;
+  --gray:#777;
+  --gray-lt:#aaa;
+  --ff-head:'Bebas Neue',sans-serif;
+  --ff-body:'Inter',sans-serif;
+  --ff-mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff-body);background:var(--black);color:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none}
+*,a,button{cursor:none!important}
+
+/* CURSOR */
+#cur{position:fixed;top:0;left:0;z-index:9999;width:8px;height:8px;background:var(--yellow);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .2s,height .2s}
+#cur.big{width:36px;height:36px;opacity:.4}
+
+/* NAV — asymmetric, number on left */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:grid;grid-template-columns:auto 1fr auto;
+  align-items:center;
+  padding:0 3rem;height:64px;
+  background:rgba(8,8,8,.94);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(245,196,0,.06);
+}
+.nav-num{
+  font-family:var(--ff-mono);font-size:.6rem;
+  letter-spacing:.18em;color:rgba(245,196,0,.5);
+  padding-right:2rem;
+  border-right:1px solid rgba(255,255,255,.06);
+}
+.nav-logo{
+  font-family:var(--ff-head);font-size:1.2rem;
+  letter-spacing:.1em;color:var(--white);
+  text-decoration:none;padding-left:2rem;
+}
+.nav-logo b{color:var(--yellow)}
+.nav-right{
+  display:flex;align-items:center;gap:2rem;
+}
+.nav-link{
+  font-family:var(--ff-mono);font-size:.58rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gray-lt);text-decoration:none;
+  transition:color .2s;
+}
+.nav-link:hover{color:var(--yellow)}
+.nav-cta{
+  font-family:var(--ff-mono);font-size:.6rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--black);background:var(--yellow);
+  padding:.5rem 1.25rem;text-decoration:none;
+  transition:background .2s;
+}
+.nav-cta:hover{background:var(--yellow-dk)}
+
+/* HERO — full bleed, text split across viewport */
+.hero{
+  position:relative;width:100vw;height:100vh;
+  overflow:hidden;display:grid;
+  grid-template-columns:1fr 1fr;
+}
+.hero-left{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  padding:0 3rem 4rem 3rem;
+  background:var(--black);
+}
+.hero-right{
+  position:relative;overflow:hidden;
+}
+.hero-right-img{
+  position:absolute;inset:0;
+  background-image:url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1400&q=85');
+  background-size:cover;background-position:center;
+  filter:brightness(.55) saturate(.8);
+  transition:transform 8s ease;
+}
+.hero-right:hover .hero-right-img{transform:scale(1.04)}
+
+/* Vertical text on hero right */
+.hero-right-label{
+  position:absolute;top:50%;right:2rem;
+  transform:translateY(-50%) rotate(90deg);
+  font-family:var(--ff-mono);font-size:.55rem;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);z-index:2;
+  white-space:nowrap;
+}
+
+/* Yellow diagonal slice between hero halves */
+.hero-slice{
+  position:absolute;top:0;left:50%;z-index:3;
+  width:3px;height:100%;
+  background:linear-gradient(180deg,transparent,var(--yellow),transparent);
+  transform:skewX(-3deg);
+}
+
+.hero-tag{
+  font-family:var(--ff-mono);font-size:.58rem;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--yellow);margin-bottom:1.25rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.hero-tag::before{content:'';width:20px;height:1px;background:var(--yellow)}
+
+/* Giant headline — bleeds into right side visually */
+.hero h1{
+  font-family:var(--ff-head);
+  font-size:clamp(5rem,9vw,9.5rem);
+  line-height:.85;letter-spacing:.01em;
+  color:var(--white);
+  margin-bottom:2rem;
+}
+.hero h1 .y{color:var(--yellow)}
+.hero h1 .outline{
+  -webkit-text-stroke:1px rgba(255,255,255,.3);
+  color:transparent;
+}
+
+.hero-sub{
+  font-size:.88rem;font-weight:300;
+  color:var(--gray-lt);line-height:1.85;
+  max-width:36ch;margin-bottom:2rem;
+  letter-spacing:.02em;
+}
+.hero-cta-row{
+  display:flex;align-items:center;gap:1.5rem;
+}
+.btn-y{
+  font-family:var(--ff-mono);font-size:.65rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--black);background:var(--yellow);
+  padding:.85rem 2rem;text-decoration:none;
+  transition:background .2s;
+  position:relative;
+}
+.btn-y::after{
+  content:'';position:absolute;
+  bottom:-3px;right:-3px;
+  width:100%;height:100%;
+  border:1px solid rgba(245,196,0,.35);
+  pointer-events:none;
+}
+.btn-y:hover{background:var(--yellow-dk)}
+.btn-ghost{
+  font-family:var(--ff-mono);font-size:.65rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);text-decoration:none;
+  display:flex;align-items:center;gap:.5rem;
+  transition:color .2s;
+}
+.btn-ghost::after{content:'↓';font-size:.8rem}
+.btn-ghost:hover{color:var(--yellow)}
+
+/* Hero bottom strip */
+.hero-strip{
+  position:absolute;bottom:0;left:0;right:0;z-index:4;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.hs-item{
+  padding:1rem 1.5rem;
+  border-right:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;gap:.75rem;
+}
+.hs-item:last-child{border-right:none}
+.hs-num{
+  font-family:var(--ff-head);font-size:1.6rem;
+  color:var(--yellow);line-height:1;
+}
+.hs-label{
+  font-family:var(--ff-mono);font-size:.55rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gray);line-height:1.4;
+}
+
+/* MARQUEE */
+.mq{background:var(--yellow);padding:.6rem 0;overflow:hidden}
+.mq-track{display:flex;white-space:nowrap;animation:mq 18s linear infinite}
+.mq-item{
+  font-family:var(--ff-head);font-size:.95rem;
+  letter-spacing:.1em;color:var(--black);
+  padding:0 1.75rem;flex-shrink:0;
+}
+.mq-div{color:rgba(0,0,0,.25);font-size:1rem}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SERVICES — asymmetric layout, not a grid */
+.services{padding:5rem 0;background:var(--black)}
+.svc-header{
+  padding:0 3rem 3rem;
+  display:flex;align-items:flex-end;justify-content:space-between;
+}
+.svc-header-left{}
+.svc-eyebrow{
+  font-family:var(--ff-mono);font-size:.58rem;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--yellow);margin-bottom:.6rem;
+}
+.svc-title{
+  font-family:var(--ff-head);
+  font-size:clamp(3rem,5vw,5.5rem);
+  line-height:.88;color:var(--white);
+}
+.svc-title b{color:var(--yellow)}
+.svc-header-right{
+  font-size:.82rem;font-weight:300;
+  color:var(--gray);max-width:30ch;
+  line-height:1.7;text-align:right;
+  letter-spacing:.02em;
+}
+
+/* Services — alternating full width rows */
+.svc-list{}
+.svc-row{
+  display:grid;grid-template-columns:auto 1fr 1.2fr;
+  border-top:1px solid rgba(255,255,255,.06);
+  transition:background .3s;
+  min-height:220px;
+}
+.svc-row:last-child{border-bottom:1px solid rgba(255,255,255,.06)}
+.svc-row:hover{background:rgba(255,255,255,.02)}
+.svc-row-num{
+  font-family:var(--ff-head);font-size:4rem;
+  color:rgba(245,196,0,.08);
+  padding:2rem 2rem 2rem 3rem;
+  display:flex;align-items:flex-start;
+  transition:color .3s;line-height:1;
+  width:120px;
+}
+.svc-row:hover .svc-row-num{color:rgba(245,196,0,.2)}
+.svc-row-body{
+  padding:2rem 2rem;
+  display:flex;flex-direction:column;
+  justify-content:center;
+  border-right:1px solid rgba(255,255,255,.04);
+}
+.svc-row-name{
+  font-family:var(--ff-head);font-size:2rem;
+  letter-spacing:.04em;color:var(--white);
+  margin-bottom:.75rem;
+}
+.svc-row-desc{
+  font-size:.82rem;font-weight:300;
+  color:var(--gray);line-height:1.75;
+  letter-spacing:.02em;max-width:40ch;
+}
+.svc-row-arrow{
+  font-size:1.2rem;color:var(--yellow);
+  margin-top:1rem;opacity:0;
+  transition:opacity .2s,transform .2s;
+  display:inline-block;
+}
+.svc-row:hover .svc-row-arrow{opacity:1;transform:translateX(6px)}
+.svc-row-img{
+  height:100%;min-height:220px;
+  background-size:cover;background-position:center;
+  filter:brightness(.6) saturate(.8);
+  transition:filter .4s,transform .4s;
+  overflow:hidden;
+}
+.svc-row:hover .svc-row-img{filter:brightness(.75) saturate(1);transform:scale(1.02)}
+
+/* STATS ROW — full width yellow */
+.stats-row{
+  background:var(--yellow);
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.stat-item{
+  padding:2.5rem 2rem;
+  border-right:1px solid rgba(0,0,0,.1);
+  text-align:center;
+}
+.stat-item:last-child{border-right:none}
+.stat-n{
+  font-family:var(--ff-head);font-size:3.5rem;
+  color:var(--black);line-height:1;margin-bottom:.25rem;
+}
+.stat-l{
+  font-family:var(--ff-mono);font-size:.58rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(0,0,0,.5);
+}
+
+/* ACADEMY — full bleed with background */
+.academy{
+  position:relative;overflow:hidden;
+  min-height:520px;
+  display:flex;align-items:center;
+}
+.academy-bg{
+  position:absolute;inset:0;
+  background-image:url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1400&q=80');
+  background-size:cover;background-position:center;
+  filter:brightness(.2) saturate(.5);
+}
+.academy-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(8,8,8,.95) 0%,rgba(8,8,8,.7) 60%,transparent 100%);
+}
+.academy-content{
+  position:relative;z-index:2;
+  padding:4rem 3rem;max-width:600px;
+}
+.academy-content .svc-eyebrow{margin-bottom:.6rem}
+.academy-content h2{
+  font-family:var(--ff-head);
+  font-size:clamp(2.5rem,5vw,5rem);
+  line-height:.9;color:var(--white);
+  margin-bottom:1.25rem;
+}
+.academy-content h2 b{color:var(--yellow)}
+.academy-content p{
+  font-size:.9rem;font-weight:300;
+  color:var(--gray-lt);line-height:1.85;
+  margin-bottom:2rem;max-width:42ch;
+  letter-spacing:.02em;
+}
+.academy-list{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:.5rem;margin-bottom:2rem;
+}
+.al{
+  font-family:var(--ff-mono);font-size:.62rem;
+  letter-spacing:.1em;color:rgba(255,255,255,.5);
+  display:flex;align-items:center;gap:.5rem;
+}
+.al::before{content:'→';color:var(--yellow);font-size:.7rem}
+.btn-y-sm{
+  font-family:var(--ff-mono);font-size:.65rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--black);background:var(--yellow);
+  padding:.75rem 1.75rem;text-decoration:none;
+  display:inline-block;transition:background .2s;
+}
+.btn-y-sm:hover{background:var(--yellow-dk)}
+
+/* REVIEWS — magazine layout */
+.reviews{
+  padding:5rem 3rem;
+  background:var(--black-2);
+}
+.reviews-top{
+  display:flex;align-items:flex-end;
+  justify-content:space-between;margin-bottom:3rem;
+}
+.reviews-title{
+  font-family:var(--ff-head);
+  font-size:clamp(2.5rem,4vw,4.5rem);
+  line-height:.9;color:var(--white);
+}
+.reviews-title b{color:var(--yellow)}
+.reviews-subtitle{
+  font-family:var(--ff-mono);font-size:.62rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gray);margin-bottom:.4rem;
+}
+.reviews-count{
+  font-family:var(--ff-mono);font-size:.65rem;
+  letter-spacing:.1em;color:var(--yellow);
+  text-align:right;
+}
+
+/* Review layout — one large + two small */
+.reviews-layout{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  gap:1px;background:rgba(255,255,255,.05);
+}
+.review{
+  background:var(--black-2);
+  padding:2.5rem 2rem;
+  position:relative;overflow:hidden;
+  transition:background .3s;
+}
+.review:hover{background:rgba(255,255,255,.03)}
+.review.big{
+  padding:3rem 2.5rem;
+  border-right:2px solid var(--yellow);
+}
+.review-quote{
+  font-family:var(--ff-head);font-size:5rem;
+  color:rgba(245,196,0,.08);line-height:.7;
+  margin-bottom:.5rem;
+}
+.review-text{
+  font-size:.9rem;font-weight:300;
+  color:var(--gray-lt);line-height:1.85;
+  font-style:italic;margin-bottom:1.5rem;
+  letter-spacing:.02em;
+}
+.review.big .review-text{font-size:1rem}
+.review-meta{
+  display:flex;align-items:center;gap:.75rem;
+}
+.review-stars{color:var(--yellow);font-size:.75rem;letter-spacing:.1em}
+.review-author{
+  font-family:var(--ff-mono);font-size:.58rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gray);
+}
+
+/* CTA — split, not centered */
+.cta{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:360px;
+}
+.cta-left{
+  background:var(--yellow);
+  padding:4rem 3rem;
+  display:flex;flex-direction:column;
+  justify-content:center;
+  position:relative;overflow:hidden;
+}
+.cta-left::before{
+  content:'TNG';
+  font-family:var(--ff-head);font-size:14rem;
+  color:rgba(0,0,0,.07);
+  position:absolute;right:-2rem;bottom:-2rem;
+  line-height:1;pointer-events:none;
+}
+.cta-left h2{
+  font-family:var(--ff-head);
+  font-size:clamp(2.5rem,4vw,4.5rem);
+  line-height:.9;color:var(--black);
+  margin-bottom:.75rem;position:relative;z-index:1;
+}
+.cta-left p{
+  font-size:.88rem;font-weight:300;
+  color:rgba(0,0,0,.6);line-height:1.75;
+  margin-bottom:1.75rem;max-width:36ch;
+  position:relative;z-index:1;
+}
+.btn-dark{
+  font-family:var(--ff-mono);font-size:.65rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--yellow);background:var(--black);
+  padding:.85rem 2rem;text-decoration:none;
+  display:inline-block;align-self:flex-start;
+  transition:background .2s;position:relative;z-index:1;
+}
+.btn-dark:hover{background:#1a1a1a}
+.cta-right{
+  background:var(--black-2);
+  padding:4rem 3rem;
+  display:flex;flex-direction:column;
+  justify-content:center;gap:1.5rem;
+  border-left:1px solid rgba(255,255,255,.05);
+}
+.cta-detail{
+  display:flex;flex-direction:column;gap:.25rem;
+}
+.cta-detail-label{
+  font-family:var(--ff-mono);font-size:.55rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--yellow);
+}
+.cta-detail-value{
+  font-family:var(--ff-head);font-size:1.6rem;
+  color:var(--white);letter-spacing:.04em;
+}
+.cta-divider{
+  width:100%;height:1px;
+  background:rgba(255,255,255,.06);
+}
+.cta-tel{
+  font-family:var(--ff-head);font-size:2.5rem;
+  color:var(--yellow);text-decoration:none;
+  letter-spacing:.04em;transition:color .2s;
+  display:block;
+}
+.cta-tel:hover{color:var(--yellow-dk)}
+
+/* FOOTER */
+footer{
+  background:var(--black);
+  padding:1.5rem 3rem;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  border-top:1px solid rgba(255,255,255,.04);
+}
+.footer-logo{
+  font-family:var(--ff-head);font-size:1rem;
+  letter-spacing:.1em;color:rgba(255,255,255,.4);
+  text-decoration:none;
+}
+.footer-logo b{color:var(--yellow)}
+.footer-copy{
+  font-family:var(--ff-mono);font-size:.55rem;
+  letter-spacing:.1em;color:rgba(255,255,255,.15);
+  text-align:center;
+}
+.footer-links{
+  display:flex;justify-content:flex-end;gap:1.75rem;
+}
+.footer-links a{
+  font-family:var(--ff-mono);font-size:.55rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.2);text-decoration:none;
+  transition:color .2s;
+}
+.footer-links a:hover{color:var(--yellow)}
+
+/* RESPONSIVE — tablet */
+@media(max-width:1024px){
+  /* Nav */
+  nav{grid-template-columns:1fr auto;padding:0 1.5rem;height:56px}
+  .nav-num{display:none}
+  .nav-logo{padding-left:0;font-size:1rem}
+  .nav-link{display:none}
+
+  /* Hero */
+  .hero{grid-template-columns:1fr;height:100svh;position:relative}
+  .hero-right{
+    display:block;
+    position:absolute;inset:0;
+    z-index:0;
+  }
+  .hero-right-img{
+    filter:brightness(.3) saturate(.7);
+  }
+  .hero-left{
+    position:relative;z-index:2;
+    background:linear-gradient(
+      105deg,
+      rgba(8,8,8,.92) 0%,
+      rgba(8,8,8,.75) 55%,
+      rgba(8,8,8,.35) 100%
+    );
+    padding:0 1.5rem 10rem;
+  }
+  .hero-slice{display:none}
+  .hero h1{font-size:clamp(3.5rem,11vw,6rem)}
+  .hero-sub{max-width:100%}
+  .hero-strip{
+    grid-template-columns:repeat(3,1fr);
+    position:absolute;bottom:0;left:0;right:0;
+  }
+  .hs-item{padding:.875rem 1rem}
+  .hs-num{font-size:1.25rem}
+
+  /* Services */
+  .services{padding:3.5rem 0}
+  .svc-header{flex-direction:column;gap:.75rem;padding:0 1.5rem 2rem;align-items:flex-start}
+  .svc-header-right{text-align:left;font-size:.8rem}
+  .svc-row{grid-template-columns:60px 1fr;min-height:auto;position:relative;overflow:hidden}
+  .svc-row-img{
+    display:block;
+    position:absolute;inset:0;
+    z-index:0;
+    opacity:.3;
+    filter:brightness(.5) saturate(.7);
+    min-height:auto;
+  }
+  .svc-row-num{position:relative;z-index:1;padding:1.5rem 1rem 1.5rem 1.5rem;font-size:2.5rem;width:60px}
+  .svc-row-body{position:relative;z-index:1;padding:1.5rem 1.5rem 1.5rem .5rem}
+  .svc-row-name{font-size:1.5rem}
+  .svc-row-desc{font-size:.8rem}
+
+  /* Stats */
+  .stats-row{grid-template-columns:1fr 1fr}
+  .stat-item{padding:1.75rem 1.25rem}
+  .stat-n{font-size:2.5rem}
+
+  /* Academy */
+  .academy{min-height:auto}
+  .academy-content{padding:3.5rem 1.5rem}
+  .academy-list{grid-template-columns:1fr 1fr}
+
+  /* Reviews */
+  .reviews{padding:3.5rem 1.5rem}
+  .reviews-layout{grid-template-columns:1fr}
+  .review.big{border-right:none;border-left:2px solid var(--yellow)}
+  .reviews-top{flex-direction:column;gap:.75rem;align-items:flex-start}
+
+  /* CTA */
+  .cta{grid-template-columns:1fr}
+  .cta-left{padding:3rem 1.5rem}
+  .cta-right{padding:2.5rem 1.5rem;gap:1.25rem}
+
+  /* Footer */
+  footer{grid-template-columns:1fr;gap:.75rem;text-align:center;padding:1.5rem}
+  .footer-links{justify-content:center;flex-wrap:wrap;gap:1rem}
+}
+
+/* RESPONSIVE — mobile */
+@media(max-width:480px){
+  /* Nav */
+  nav{padding:0 1.25rem;height:52px}
+  .nav-logo{font-size:.9rem}
+  .nav-cta{padding:.4rem 1rem;font-size:.58rem}
+
+  /* Hero */
+  .hero-left{padding:0 1.25rem 9rem}
+  .hero h1{font-size:clamp(3rem,13vw,4.5rem);line-height:.87}
+  .hero-tag{font-size:.52rem;margin-bottom:1rem}
+  .hero-sub{font-size:.82rem;margin-bottom:1.5rem}
+  .hero-cta-row{flex-direction:column;align-items:flex-start;gap:.875rem}
+  .btn-y{width:100%;text-align:center;padding:.875rem 1.5rem}
+  .btn-ghost{font-size:.6rem}
+  .hero-strip{grid-template-columns:1fr 1fr 1fr}
+  .hs-item{padding:.65rem .5rem;gap:.4rem}
+  .hs-num{font-size:1.1rem}
+  .hs-label{font-size:.46rem;letter-spacing:.08em}
+
+  /* Marquee */
+  .mq-item{font-size:.8rem;padding:0 1.25rem}
+
+  /* Services */
+  .services{padding:2.5rem 0}
+  .svc-header{padding:0 1.25rem 1.75rem}
+  .svc-title{font-size:2.5rem}
+  .svc-eyebrow{font-size:.52rem}
+  .svc-row{grid-template-columns:50px 1fr}
+  .svc-row-num{padding:1.25rem .75rem 1.25rem 1.25rem;font-size:2rem;width:50px}
+  .svc-row-body{padding:1.25rem 1.25rem 1.25rem .5rem}
+  .svc-row-name{font-size:1.25rem;margin-bottom:.5rem}
+  .svc-row-desc{font-size:.77rem;line-height:1.7}
+  .svc-row-arrow{font-size:1rem;margin-top:.75rem}
+
+  /* Stats */
+  .stats-row{grid-template-columns:1fr 1fr}
+  .stat-item{padding:1.25rem 1rem}
+  .stat-n{font-size:2rem}
+  .stat-l{font-size:.5rem;letter-spacing:.1em}
+
+  /* Academy */
+  .academy-content{padding:3rem 1.25rem}
+  .academy-content h2{font-size:2.8rem}
+  .academy-content p{font-size:.82rem;max-width:100%}
+  .academy-list{grid-template-columns:1fr;gap:.4rem}
+  .al{font-size:.6rem}
+  .btn-y-sm{width:100%;text-align:center;padding:.875rem}
+
+  /* Reviews */
+  .reviews{padding:2.5rem 1.25rem}
+  .reviews-title{font-size:2.5rem}
+  .review{padding:1.75rem 1.25rem}
+  .review.big{padding:2rem 1.25rem}
+  .review-quote{font-size:3.5rem}
+  .review-text{font-size:.82rem;margin-bottom:1.25rem}
+
+  /* CTA */
+  .cta-left{padding:2.5rem 1.25rem}
+  .cta-left h2{font-size:2.5rem}
+  .cta-left p{font-size:.82rem}
+  .btn-dark{width:100%;text-align:center;padding:.875rem}
+  .cta-right{padding:2rem 1.25rem;gap:1rem}
+  .cta-tel{font-size:1.8rem}
+  .cta-detail-value{font-size:.88rem!important}
+
+  /* Footer */
+  footer{padding:1.25rem}
+  .footer-logo{font-size:.85rem}
+  .footer-copy{font-size:.5rem}
+  .footer-links{gap:.75rem}
+  .footer-links a{font-size:.5rem}
+}
+
+/* Hide cursor on touch */
+@media(hover:none){
+  #cur{display:none}
+  body{cursor:auto}
+  *,a,button{cursor:auto!important}
+}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="navbar">
-  <div class="nav-inner">
-    <div class="nav-logo" onclick="showPage('home')">
-      <img src="https://static.wixstatic.com/media/f9c684_6cced2cf81c744149a9a068015303ec9~mv2.png/v1/fill/w_209,h_209,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/TNG-LogoGoldText-WHITE.png" alt="Tint Nation Gurus" class="nav-logo-img">
-    </div>
-    <ul class="nav-links">
-      <li><button onclick="showPage('home')" id="nav-home" class="active">Home</button></li>
-      <li><button onclick="showPage('services')" id="nav-services">Services</button></li>
-      <li><button onclick="showPage('about')" id="nav-about">About</button></li>
-      <li><button onclick="showPage('contact')" id="nav-contact">Contact</button></li>
-      <li><button onclick="showPage('contact')" class="nav-cta">Book Now</button></li>
-    </ul>
-    <div class="nav-phone-wrap">
-      <a href="tel:9192700371" class="nav-phone">📞 919-270-0371</a>
-    </div>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </button>
+<div id="cur"></div>
+
+<!-- NAV — asymmetric with index number -->
+<nav id="nav">
+  <div class="nav-num">NC · 001</div>
+  <a href="#" class="nav-logo">TINT <b>NATION</b> GURUS</a>
+  <div class="nav-right">
+    <a href="#services" class="nav-link">Services</a>
+    <a href="#academy" class="nav-link">Academy</a>
+    <a href="#contact" class="nav-cta">Get a Quote</a>
   </div>
 </nav>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobile-menu">
-  <button onclick="showPage('home')" id="mob-home" class="active">Home</button>
-  <button onclick="showPage('services')" id="mob-services">Services</button>
-  <button onclick="showPage('about')" id="mob-about">About</button>
-  <button onclick="showPage('contact')" id="mob-contact">Contact</button>
-  <button onclick="showPage('contact')" class="mob-cta">Book Now</button>
+<!-- HERO — split screen, not centered -->
+<section class="hero">
+  <div class="hero-left" id="heroLeft">
+    <div class="hero-tag">Raleigh · Charlotte · North Carolina</div>
+    <h1>
+      TINT.<br>
+      <span class="outline">WRAP.</span><br>
+      <span class="y">PROTECT.</span>
+    </h1>
+    <p class="hero-sub">
+      Professional window tinting, vehicle wraps, ceramic coating and paint protection. Done right the first time — every time.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#contact" class="btn-y">Get a Free Quote</a>
+      <a href="#services" class="btn-ghost">View Services</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-img" id="heroImg"></div>
+    <div class="hero-right-label">Professional · Precision · NC</div>
+  </div>
+  <div class="hero-slice"></div>
+  <div class="hero-strip" id="heroStrip">
+    <div class="hs-item">
+      <div class="hs-num">500+</div>
+      <div class="hs-label">Vehicles<br>Completed</div>
+    </div>
+    <div class="hs-item">
+      <div class="hs-num">5★</div>
+      <div class="hs-label">Google<br>Rating</div>
+    </div>
+    <div class="hs-item">
+      <div class="hs-num">8–9</div>
+      <div class="hs-label">Open<br>Every Day</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mq-track">
+    <span class="mq-item">Window Tinting</span><span class="mq-item mq-div">◆</span>
+    <span class="mq-item">Vehicle Wraps</span><span class="mq-item mq-div">◆</span>
+    <span class="mq-item">Ceramic Coating</span><span class="mq-item mq-div">◆</span>
+    <span class="mq-item">Paint Protection Film</span><span class="mq-item mq-div">◆</span>
+    <span class="mq-item">Custom Lighting</span><span class="mq-item mq-div">◆</span>
+    <span class="mq-item">Tint Nation Academy</span><span class="mq-item mq-div">◆</span>
+    <span class="mq-item">Window Tinting</span><span class="mq-item mq-div">◆</span>
+    <span class="mq-item">Vehicle Wraps</span><span class="mq-item mq-div">◆</span>
+    <span class="mq-item">Ceramic Coating</span><span class="mq-item mq-div">◆</span>
+    <span class="mq-item">Paint Protection Film</span><span class="mq-item mq-div">◆</span>
+    <span class="mq-item">Custom Lighting</span><span class="mq-item mq-div">◆</span>
+    <span class="mq-item">Tint Nation Academy</span><span class="mq-item mq-div">◆</span>
+  </div>
 </div>
 
-<!-- ═══════════ HOME ═══════════ -->
-<div id="page-home" class="page active">
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-carbon"></div>
-    <div class="hero-overlay"></div>
-    <img src="images/car stock image.jpg" alt="Tint Nation Gurus" class="hero-bg-img">
-    <div class="hero-content">
-      <div class="hero-eyebrow">✦ Raleigh, NC · Mon–Sun 8am–9pm</div>
-      <h1>ELEVATE YOUR<br><em>RIDE.</em></h1>
-      <p>Premium window tinting, vehicle wraps, paint protection film, ceramic coating, and custom lighting. Raleigh's most trusted automotive restyling studio.</p>
-      <div class="hero-btns">
-        <button class="btn-gold" onclick="showPage('contact')">Book a Service ✦</button>
-        <a href="tel:9192700371" class="btn-ghost">Call Malik: 919-270-0371</a>
-      </div>
-      <div class="hero-tags">
-        <span class="htag">🪟 Window Tint</span>
-        <span class="htag">🎨 Vehicle Wraps</span>
-        <span class="htag">🛡️ Paint Protection</span>
-        <span class="htag">✨ Ceramic Coating</span>
-        <span class="htag">💡 Custom Lighting</span>
-      </div>
+<!-- SERVICES — full width rows, not card grid -->
+<section class="services" id="services">
+  <div class="svc-header">
+    <div class="svc-header-left">
+      <div class="svc-eyebrow">What We Do</div>
+      <div class="svc-title">Our <b>Services</b></div>
     </div>
-    <div class="hero-stripe"></div>
-  </section>
-
-  <!-- STATS BAR -->
-  <div class="stats-bar">
-    <div class="stats-inner">
-      <div class="stat-item">
-        <div class="si-num">5★</div>
-        <div class="si-label">Rated</div>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat-item">
-        <div class="si-num">7</div>
-        <div class="si-label">Days a Week</div>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat-item">
-        <div class="si-num">8AM–9PM</div>
-        <div class="si-label">Extended Hours</div>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat-item">
-        <div class="si-num">100%</div>
-        <div class="si-label">Custom Quotes</div>
-      </div>
+    <div class="svc-header-right">
+      Every install is backed by a lifetime warranty and done with professional-grade materials. No shortcuts.
     </div>
   </div>
-
-  <!-- GOOGLE REVIEWS BADGE -->
-  <div class="g-reviews-bar">
-    <a href="https://www.google.com/search?sca_esv=1e191da9c85b6632&rlz=1C1VDKB_enUS1121US1121&sxsrf=ANbL-n49R8TEMUZAGRtqAvPoehkaA2oG1Q:1780517628800&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOaolfWFHoDxOjL6Uhcm9SRvf6LeojzHHtk0Ebt8F2x6OXP72m6WDGxmgJPFVqFybBKwHur9V7D6giQU1qtuDMRwUtaAPu9Vmu6qXESy9tmjeY3PksA%3D%3D&q=Tint+Nation+Gurus+Reviews&sa=X&ved=2ahUKEwjDrJ-G8euUAxXfGVkFHd6QN_0Q0bkNegQIKhAH&biw=958&bih=944&dpr=1" target="_blank" rel="noopener" class="g-reviews-link">
-      <svg class="g-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="28" height="28">
-        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/>
-        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.58-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-        <path fill="none" d="M0 0h48v48H0z"/>
-      </svg>
-      <div class="g-reviews-text">
-        <span class="g-reviews-title">Google Reviews</span>
-        <div class="g-stars">
-          <span class="g-star">★</span><span class="g-star">★</span><span class="g-star">★</span><span class="g-star">★</span><span class="g-star">★</span>
-          <span class="g-rating">5.0</span>
-        </div>
+  <div class="svc-list" id="svcList">
+    <div class="svc-row">
+      <div class="svc-row-num">01</div>
+      <div class="svc-row-body">
+        <div class="svc-row-name">Window Tinting</div>
+        <p class="svc-row-desc">Auto, residential, and commercial tinting using premium films. UV protection, heat rejection, privacy — with a lifetime warranty on every install.</p>
+        <span class="svc-row-arrow">→</span>
       </div>
-      <span class="g-reviews-cta">Read Our Reviews →</span>
-    </a>
-  </div>
-
-  <!-- SERVICES SECTION -->
-  <section class="section">
-    <div class="section-inner">
-      <div class="section-tag">What We Do</div>
-      <h2 class="section-h">Expert Services.<br><em>Exceptional Results.</em></h2>
-      <p class="section-p">From the glass on your vehicle to the paint on your hood — we use industry-leading technology to protect and elevate every build.</p>
-      <div class="services-grid">
-        <div class="svc-card" onclick="showPage('services')">
-          <div class="svc-img-wrap">
-            <img src="images/window tinting.jpg" alt="Window Tinting" class="svc-img">
-            <div class="svc-overlay">View Service →</div>
-          </div>
-          <div class="svc-body">
-            <div class="svc-num">01</div>
-            <h3>Window Tinting</h3>
-            <p>Auto, residential & commercial. Advanced carbon and ceramic films for UV protection, heat rejection, and privacy.</p>
-            <span class="svc-tag">Auto · Residential · Commercial</span>
-          </div>
-        </div>
-        <div class="svc-card" onclick="showPage('services')">
-          <div class="svc-img-wrap">
-            <img src="images/car wrap.jpg" alt="Vehicle Wraps" class="svc-img">
-            <div class="svc-overlay">View Service →</div>
-          </div>
-          <div class="svc-body">
-            <div class="svc-num">02</div>
-            <h3>Vehicle Wraps</h3>
-            <p>Full, partial, and spray wraps for a factory-quality, reversible color change. Make it yours.</p>
-            <span class="svc-tag">Full · Partial · Spray</span>
-          </div>
-        </div>
-        <div class="svc-card" onclick="showPage('services')">
-          <div class="svc-img-wrap">
-            <img src="images/protection film.jpg" alt="Paint Protection Film" class="svc-img">
-            <div class="svc-overlay">View Service →</div>
-          </div>
-          <div class="svc-body">
-            <div class="svc-num">03</div>
-            <h3>Paint Protection Film</h3>
-            <p>Industry-leading PPF that guards against road debris, chips, and scratches. Protect your investment.</p>
-            <span class="svc-tag">Full Body · Partial · Spot</span>
-          </div>
-        </div>
-        <div class="svc-card" onclick="showPage('services')">
-          <div class="svc-img-wrap">
-            <img src="images/ceramic coating.jpg" alt="Ceramic Coating" class="svc-img">
-            <div class="svc-overlay">View Service →</div>
-          </div>
-          <div class="svc-body">
-            <div class="svc-num">04</div>
-            <h3>Ceramic Coating</h3>
-            <p>"Guru Gloss" finish with 5+ years of hydrophobic durability. The deepest, cleanest shine on the road.</p>
-            <span class="svc-tag">Cars · Trucks · Exotics</span>
-          </div>
-        </div>
-        <div class="svc-card" onclick="showPage('services')">
-          <div class="svc-img-wrap">
-            <img src="images/custom lightning.webp" alt="Custom Lighting" class="svc-img">
-            <div class="svc-overlay">View Service →</div>
-          </div>
-          <div class="svc-body">
-            <div class="svc-num">05</div>
-            <h3>Custom Lighting</h3>
-            <p>Ambient interior lighting and headlight restoration upgrades for enhanced visibility and aesthetics.</p>
-            <span class="svc-tag">Interior · Headlights · Custom</span>
-          </div>
-        </div>
-        <div class="svc-card academy-card" onclick="showPage('about')">
-          <div class="svc-img-wrap">
-            <img src="images/tint nation training.jpg" alt="Tint Nation Academy" class="svc-img">
-            <div class="svc-overlay">Learn More →</div>
-          </div>
-          <div class="svc-body">
-            <div class="svc-num academy-num">ACADEMY</div>
-            <h3>Tint Nation Academy</h3>
-            <p>Train like a student. Graduate a Guru. Hands-on courses that turn beginners into high-earning restyling professionals.</p>
-            <span class="svc-tag academy-tag">Courses · Mentorship · Career</span>
-          </div>
-        </div>
-      </div>
+      <div class="svc-row-img" style="background-image:linear-gradient(to right,rgba(8,8,8,.7) 0%,rgba(8,8,8,.2) 40%,transparent 100%),url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=700&q=80')"></div>
     </div>
-  </section>
-
-  <!-- WHY TNG -->
-  <section class="why-section">
-    <div class="why-inner">
-      <div class="why-text">
-        <div class="section-tag">Why Choose Us</div>
-        <h2 class="section-h" style="color:var(--white)">The Best Window<br><em>Tinter In The Game.</em></h2>
-        <p style="color:var(--text-soft);margin-top:1rem;line-height:1.8">Fast, friendly, and top-quality — Tint Nation Gurus is Raleigh's go-to shop for anyone serious about their vehicle. Malik and the team bring precision to every install.</p>
-        <div class="why-list">
-          <div class="why-row"><div class="wcheck">✓</div><span>Premium carbon & ceramic film brands</span></div>
-          <div class="why-row"><div class="wcheck">✓</div><span>Auto, residential & commercial tinting</span></div>
-          <div class="why-row"><div class="wcheck">✓</div><span>Extended hours — Mon through Sun</span></div>
-          <div class="why-row"><div class="wcheck">✓</div><span>Custom quotes, no pressure</span></div>
-          <div class="why-row"><div class="wcheck">✓</div><span>5-star rated across all platforms</span></div>
-          <div class="why-row"><div class="wcheck">✓</div><span>Lifetime warranty on select services</span></div>
-        </div>
-        <button class="btn-gold" style="margin-top:2rem" onclick="showPage('contact')">Book Your Appointment →</button>
+    <div class="svc-row">
+      <div class="svc-row-num">02</div>
+      <div class="svc-row-body">
+        <div class="svc-row-name">Vehicle Wraps</div>
+        <p class="svc-row-desc">Full wraps, partial wraps, and custom graphics. Any color, any finish — matte, gloss, satin, chrome. Your vehicle, transformed.</p>
+        <span class="svc-row-arrow">→</span>
       </div>
-      <div class="why-img-col">
-        <img src="https://static.wixstatic.com/media/f9c684_6b2fb39969034cf1bd1f01a962eb4383~mv2.png/v1/fill/w_639,h_828,al_c,q_90,enc_avif,quality_auto/NewServicesWarranty.png" alt="TNG Services & Warranty" class="why-img">
-      </div>
+      <div class="svc-row-img" style="background-image:linear-gradient(to right,rgba(8,8,8,.7) 0%,rgba(8,8,8,.2) 40%,transparent 100%),url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=700&q=80')"></div>
     </div>
-  </section>
-
-  <!-- HOURS + LOCATION -->
-  <section class="section info-section">
-    <div class="section-inner info-grid">
-      <div class="info-card">
-        <div class="info-icon">📍</div>
-        <h3>Location</h3>
-        <p>1819 E. Millbrook Road<br>Raleigh, NC 27609</p>
-        <a href="https://maps.google.com/?q=1819+E+Millbrook+Rd+Raleigh+NC" target="_blank" class="info-link">Get Directions →</a>
+    <div class="svc-row">
+      <div class="svc-row-num">03</div>
+      <div class="svc-row-body">
+        <div class="svc-row-name">Paint Protection Film</div>
+        <p class="svc-row-desc">Invisible armor for your paint. Self-healing PPF protects against rock chips, scratches, and road debris — factory-fresh forever.</p>
+        <span class="svc-row-arrow">→</span>
       </div>
-      <div class="info-card info-card-featured">
-        <div class="info-icon">📞</div>
-        <h3>Book With Malik</h3>
-        <p>Call or text for your custom quote. Fast response, no waiting.</p>
-        <a href="tel:9192700371" class="btn-gold" style="margin-top:1rem;display:inline-flex">Call: 919-270-0371</a>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">🕐</div>
-        <h3>Hours</h3>
-        <p>Monday – Sunday<br>8:00 AM – 9:00 PM</p>
-        <span class="info-badge">Extended Hours</span>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">📸</div>
-        <h3>Follow Us</h3>
-        <p>See the latest builds, installs, and drops on Instagram.</p>
-        <a href="https://www.instagram.com/tintnationgurus/" target="_blank" class="info-link">@tintnationgurus →</a>
-      </div>
+      <div class="svc-row-img" style="background-image:linear-gradient(to right,rgba(8,8,8,.7) 0%,rgba(8,8,8,.2) 40%,transparent 100%),url('https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=700&q=80')"></div>
     </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="section faq-section">
-    <div class="section-inner">
-      <div class="section-tag">FAQ</div>
-      <h2 class="section-h">Frequently Asked<br><em>Questions.</em></h2>
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Do I receive certification?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-a">Yes. Each completed course includes a professional certification.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Are tools included?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-a">Most programs include a starter toolkit or equipment guidance list.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Can I learn this in 2–3 days?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-a">Yes. Our high-intensity, hands-on approach prepares you for real installs immediately.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Do I need prior experience?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-a">No. Beginner-friendly courses are available.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Can I start my own business after?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-a">Yes — many graduates launch their own shops or mobile services.</div>
-        </div>
+    <div class="svc-row">
+      <div class="svc-row-num">04</div>
+      <div class="svc-row-body">
+        <div class="svc-row-name">Ceramic Coating</div>
+        <p class="svc-row-desc">Professional-grade ceramic coating that bonds to your paint. Years of hydrophobic protection, unmatched gloss, effortless maintenance.</p>
+        <span class="svc-row-arrow">→</span>
       </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <div class="cta-banner">
-    <div class="cta-banner-inner">
-      <div class="cta-carbon"></div>
-      <h2>Ready to Elevate<br><em>Your Ride?</em></h2>
-      <p>Call or text Malik for a custom quote. Fast, friendly, and built to impress.</p>
-      <div class="cta-btns">
-        <button class="btn-gold" onclick="showPage('contact')">Book a Service ✦</button>
-        <a href="tel:9192700371" class="btn-ghost">📞 919-270-0371</a>
-      </div>
+      <div class="svc-row-img" style="background-image:linear-gradient(to right,rgba(8,8,8,.7) 0%,rgba(8,8,8,.2) 40%,transparent 100%),url('https://images.unsplash.com/photo-1612544448445-b8232cff3b6c?w=700&q=80')"></div>
     </div>
   </div>
+</section>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <img src="https://static.wixstatic.com/media/f9c684_6cced2cf81c744149a9a068015303ec9~mv2.png/v1/fill/w_209,h_209,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/TNG-LogoGoldText-WHITE.png" alt="TNG" class="footer-logo">
-        <p class="footer-tagline">Raleigh's most trusted automotive restyling studio. Window tint, wraps, PPF, ceramic coating, and custom lighting.</p>
-        <a href="https://www.instagram.com/tintnationgurus/" target="_blank" class="footer-social">Instagram</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Pages</div>
-        <ul class="footer-links">
-          <li><button onclick="showPage('home')">Home</button></li>
-          <li><button onclick="showPage('services')">Services</button></li>
-          <li><button onclick="showPage('about')">About</button></li>
-          <li><button onclick="showPage('contact')">Contact / Book</button></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Services</div>
-        <ul class="footer-links">
-          <li><button onclick="showPage('services')">Window Tinting</button></li>
-          <li><button onclick="showPage('services')">Vehicle Wraps</button></li>
-          <li><button onclick="showPage('services')">Paint Protection Film</button></li>
-          <li><button onclick="showPage('services')">Ceramic Coating</button></li>
-          <li><button onclick="showPage('services')">Custom Lighting</button></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Contact</div>
-        <ul class="footer-links">
-          <li><a href="tel:9192700371">919-270-0371</a></li>
-          <li><span>1819 E. Millbrook Rd</span></li>
-          <li><span>Raleigh, NC 27609</span></li>
-          <li><span>Mon–Sun: 8am–9pm</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Tint Nation Gurus · Raleigh, NC</span>
-      <span>Fast · Friendly · Top Quality</span>
-    </div>
-  </footer>
-
+<!-- STATS ROW — yellow full width -->
+<div class="stats-row" id="statsRow">
+  <div class="stat-item">
+    <div class="stat-n">500+</div>
+    <div class="stat-l">Vehicles Tinted</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-n">5★</div>
+    <div class="stat-l">Google Rating</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-n">∞</div>
+    <div class="stat-l">Lifetime Warranty</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-n">7</div>
+    <div class="stat-l">Days a Week</div>
+  </div>
 </div>
 
-<!-- ═══════════ SERVICES ═══════════ -->
-<div id="page-services" class="page">
-
-  <div class="page-hero">
-    <div class="page-hero-carbon"></div>
-    <div class="page-hero-content">
-      <div class="section-tag">Our Services</div>
-      <h1 class="page-h1">Expert Services.<br><em>Exceptional Results.</em></h1>
-      <p class="page-sub">Premium enhancements designed to protect your investment and elevate your aesthetic. We use industry-leading technology on every build.</p>
+<!-- ACADEMY — full bleed photo background -->
+<section class="academy" id="academy">
+  <div class="academy-bg"></div>
+  <div class="academy-overlay"></div>
+  <div class="academy-content" id="academyContent">
+    <div class="svc-eyebrow">Learn the Craft</div>
+    <h2>Tint Nation<br><b>Academy</b></h2>
+    <p>Train under a seasoned industry veteran. Hands-on, in-shop training with real vehicles and industry-grade materials. From beginner to professional — in weeks.</p>
+    <div class="academy-list">
+      <div class="al">Live shop environment</div>
+      <div class="al">Industry-grade tools</div>
+      <div class="al">Ongoing mentorship</div>
+      <div class="al">Business guidance</div>
+      <div class="al">Real vehicles — day one</div>
+      <div class="al">Financial freedom</div>
     </div>
-    <div class="page-hero-stripe"></div>
+    <a href="mailto:tintnationacademy@gmail.com" class="btn-y-sm">Apply for Enrollment</a>
   </div>
+</section>
 
-  <section class="section">
-    <div class="section-inner">
-      <div class="sd-list-wrap">
-
-        <div class="sd-item">
-          <div class="sd-content">
-            <div class="sd-num">01</div>
-            <h3>Window Tinting</h3>
-            <p>Professional window tinting for auto, residential, and commercial clients. We utilize advanced carbon and ceramic films to provide superior UV protection, heat rejection, and privacy for your vehicle, home, or office. Every install is precision-cut and bubble-free.</p>
-            <ul class="sd-bullets">
-              <li>Automotive — sedans, trucks, SUVs, exotics</li>
-              <li>Residential — homes, offices, storefronts</li>
-              <li>Commercial — retail, warehouses, buildings</li>
-              <li>Carbon and ceramic film options</li>
-              <li>UV protection & heat rejection</li>
-              <li>NC legal tint levels available</li>
-            </ul>
-          </div>
-          <div class="sd-visual">
-            <img src="images/window tinting.jpg" alt="Window Tinting" class="sd-img">
-          </div>
-        </div>
-
-        <div class="sd-item sd-reverse">
-          <div class="sd-content">
-            <div class="sd-num">02</div>
-            <h3>Vehicle Wraps & Customization</h3>
-            <p>Full and partial vinyl vehicle wraps and seamless spray vehicle wraps for a factory-quality, reversible color change. Transform your vehicle completely — or add accents and custom graphics that make it uniquely yours.</p>
-            <ul class="sd-bullets">
-              <li>Full vehicle color change wraps</li>
-              <li>Partial wraps & accent pieces</li>
-              <li>Spray vehicle wraps</li>
-              <li>Custom graphics & decals</li>
-              <li>Gloss, matte, satin & chrome finishes</li>
-              <li>Fully reversible — protects factory paint</li>
-            </ul>
-          </div>
-          <div class="sd-visual">
-            <img src="images/car wrap.jpg" alt="Vehicle Wraps" class="sd-img">
-          </div>
-        </div>
-
-        <div class="sd-item">
-          <div class="sd-content">
-            <div class="sd-num">03</div>
-            <h3>Paint Protection Film (PPF)</h3>
-            <p>Industry-leading paint protection film guards against road debris, chips, scratches, and environmental damage. Invisible protection that keeps your paint looking showroom-fresh for years.</p>
-            <ul class="sd-bullets">
-              <li>Full body protection packages</li>
-              <li>Partial coverage — hood, bumper, mirrors</li>
-              <li>Self-healing film technology</li>
-              <li>Maintains factory paint finish</li>
-              <li>Protects resale value</li>
-              <li>Crystal clear and virtually invisible</li>
-            </ul>
-          </div>
-          <div class="sd-visual">
-            <img src="images/protection film.jpg" alt="Paint Protection Film" class="sd-img">
-          </div>
-        </div>
-
-        <div class="sd-item sd-reverse">
-          <div class="sd-content">
-            <div class="sd-num">04</div>
-            <h3>Ceramic Coating</h3>
-            <p>Our professional-grade ceramic coating delivers the "Guru Gloss" finish — over five years of hydrophobic durability that repels water, dirt, and UV damage while giving your vehicle the deepest, most reflective shine on the road.</p>
-            <ul class="sd-bullets">
-              <li>5+ years of protection</li>
-              <li>Hydrophobic water-repelling technology</li>
-              <li>"Guru Gloss" deep shine finish</li>
-              <li>UV and oxidation protection</li>
-              <li>Cars, trucks, SUVs & exotics</li>
-              <li>Maintenance packages available</li>
-            </ul>
-          </div>
-          <div class="sd-visual">
-            <img src="images/ceramic coating.jpg" alt="Ceramic Coating" class="sd-img">
-          </div>
-        </div>
-
-        <div class="sd-item">
-          <div class="sd-content">
-            <div class="sd-num">05</div>
-            <h3>Lighting & Visibility Upgrades</h3>
-            <p>Enhance your driving experience and make your vehicle stand out with custom ambient lighting installations and professional headlight restoration. Better visibility. Better style.</p>
-            <ul class="sd-bullets">
-              <li>Custom interior ambient lighting</li>
-              <li>Headlight restoration & polishing</li>
-              <li>LED lighting upgrades</li>
-              <li>Color-matched accent lighting</li>
-              <li>Improved nighttime visibility</li>
-            </ul>
-          </div>
-          <div class="sd-visual">
-            <img src="images/custom lightning.webp" alt="Custom Lighting" class="sd-img">
-          </div>
-        </div>
-
+<!-- REVIEWS — magazine layout -->
+<section class="reviews" id="reviews">
+  <div class="reviews-top">
+    <div>
+      <div class="reviews-subtitle">What Clients Say</div>
+      <div class="reviews-title">Five <b>Star</b><br>Work.</div>
+    </div>
+    <div>
+      <div class="reviews-count">★★★★★ · Rated 5.0 on Google</div>
+    </div>
+  </div>
+  <div class="reviews-layout" id="reviewsLayout">
+    <div class="review big">
+      <div class="review-quote">"</div>
+      <p class="review-text">Fast, friendly, and top quality. Malik did my tint in under 2 hours and it looks perfect. No bubbles, no streaks — exactly what I wanted. Already bringing my wife's car next week.</p>
+      <div class="review-meta">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-author">James T. · Charlotte, NC</div>
       </div>
     </div>
-  </section>
-
-  <div class="cta-banner">
-    <div class="cta-banner-inner">
-      <div class="cta-carbon"></div>
-      <h2>Custom Quote for<br><em>Your Vehicle</em></h2>
-      <p>Every vehicle is different. Call or text Malik and we'll build a package around your exact needs and budget.</p>
-      <div class="cta-btns">
-        <button class="btn-gold" onclick="showPage('contact')">Request a Quote ✦</button>
-        <a href="tel:9192700371" class="btn-ghost">📞 Call Malik</a>
+    <div class="review">
+      <div class="review-quote">"</div>
+      <p class="review-text">Best tint job I've ever had. Been to 3 other places over the years and none of them come close. Don't waste your time anywhere else.</p>
+      <div class="review-meta">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-author">Marcus R. · Raleigh, NC</div>
+      </div>
+    </div>
+    <div class="review">
+      <div class="review-quote">"</div>
+      <p class="review-text">Got a full wrap done and couldn't be happier. The attention to detail is insane — every edge, every curve, perfect. My car looks brand new.</p>
+      <div class="review-meta">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-author">DeShawn M. · Greensboro, NC</div>
       </div>
     </div>
   </div>
+</section>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <img src="https://static.wixstatic.com/media/f9c684_6cced2cf81c744149a9a068015303ec9~mv2.png/v1/fill/w_209,h_209,al_c,q_85,enc_avif/TNG-LogoGoldText-WHITE.png" alt="TNG" class="footer-logo">
-        <p class="footer-tagline">Raleigh's most trusted automotive restyling studio.</p>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Pages</div>
-        <ul class="footer-links">
-          <li><button onclick="showPage('home')">Home</button></li>
-          <li><button onclick="showPage('services')">Services</button></li>
-          <li><button onclick="showPage('about')">About</button></li>
-          <li><button onclick="showPage('contact')">Contact</button></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Contact</div>
-        <ul class="footer-links">
-          <li><a href="tel:9192700371">919-270-0371</a></li>
-          <li><span>1819 E. Millbrook Rd, Raleigh NC</span></li>
-          <li><span>Mon–Sun 8am–9pm</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom"><span>© 2025 Tint Nation Gurus · Raleigh, NC</span></div>
-  </footer>
-
-</div>
-
-<!-- ═══════════ ABOUT ═══════════ -->
-<div id="page-about" class="page">
-
-  <div class="page-hero">
-    <div class="page-hero-carbon"></div>
-    <div class="page-hero-content">
-      <div class="section-tag">About Us</div>
-      <h1 class="page-h1">Train Like a Student.<br><em>Graduate a Guru.</em></h1>
-      <p class="page-sub">Tint Nation Gurus is more than a shop — it's a standard of excellence in automotive restyling and a movement built on mastery.</p>
-    </div>
-    <div class="page-hero-stripe"></div>
+<!-- CTA — split layout, not centered -->
+<section class="cta" id="contact">
+  <div class="cta-left">
+    <h2>READY TO<br>ELEVATE<br>YOUR RIDE?</h2>
+    <p>Call or text Malik directly. Same-day appointments available. Open 7 days a week, 8am to 9pm.</p>
+    <a href="tel:9192700371" class="btn-dark">Call Now</a>
   </div>
-
-  <section class="section about-section">
-    <div class="section-inner">
-      <div class="about-grid">
-        <div class="about-text">
-          <div class="section-tag">The Story</div>
-          <h2 class="about-h2">Built on Precision.<br><em>Driven by Excellence.</em></h2>
-          <p>Tint Nation Gurus started with one mission — deliver premium automotive restyling services that actually match the quality of the vehicles we work on. From the first tint job to a full ceramic-coated exotic, the standard has never changed.</p>
-          <p>Located at 1819 E. Millbrook Road in Raleigh, NC, we've built a reputation as the most trusted shop in the area for window tinting, vehicle wraps, paint protection, ceramic coating, and custom lighting — all under one roof, with extended hours seven days a week.</p>
-          <p>Malik and the team bring precision, passion, and professionalism to every single build. When you book with Tint Nation Gurus, you're not getting a quick job — you're getting a craft.</p>
-          <div class="about-stats">
-            <div class="astat">
-              <div class="astat-num">5★</div>
-              <div class="astat-label">Rated</div>
-            </div>
-            <div class="astat">
-              <div class="astat-num">7</div>
-              <div class="astat-label">Days a Week</div>
-            </div>
-            <div class="astat">
-              <div class="astat-num">5+</div>
-              <div class="astat-label">Services Offered</div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="cta-right">
+    <div class="cta-detail">
+      <div class="cta-detail-label">Direct Line</div>
+      <a href="tel:9192700371" class="cta-tel">919-270-0371</a>
     </div>
-  </section>
-
-  <!-- ACADEMY -->
-  <section class="academy-section">
-    <div class="section-inner">
-      <div class="academy-grid">
-        <div class="academy-visual">
-          <img src="https://static.wixstatic.com/media/f9c684_e4d6dd727a7e4b3985a0ebce87aeab8f~mv2.png/v1/crop/x_0,y_0,w_1080,h_983/fill/w_540,h_490,al_c,q_90/TNG%20hands%20on%20class.png" alt="Tint Nation Academy" class="academy-img">
-        </div>
-        <div class="academy-text">
-          <div class="section-tag academy-tag-label">Tint Nation Academy</div>
-          <h2 class="section-h" style="color:var(--white)">Turn a Skill Into<br><em>a Career.</em></h2>
-          <p style="color:var(--text-soft);margin-top:1rem;line-height:1.8">Tint Nation Academy is more than a training facility — it's where careers are built and futures are transformed. Our hands-on, professional courses take you from beginner to high-earning restyling professional through real-world, in-shop training.</p>
-          <div class="academy-features">
-            <div class="af-item"><span class="af-icon">🎓</span>Hands-on in-shop training</div>
-            <div class="af-item"><span class="af-icon">🤝</span>Ongoing mentorship</div>
-            <div class="af-item"><span class="af-icon">📈</span>Business guidance</div>
-            <div class="af-item"><span class="af-icon">⚙️</span>Industry-sponsored materials</div>
-            <div class="af-item"><span class="af-icon">💰</span>High-income skill development</div>
-            <div class="af-item"><span class="af-icon">🏆</span>Real-time feedback</div>
-          </div>
-          <a href="https://www.instagram.com/tintnationgurus/" target="_blank" rel="noopener" class="btn-gold" style="margin-top:2rem;display:inline-flex">Inquire About Enrollment →</a>
-        </div>
-      </div>
+    <div class="cta-divider"></div>
+    <div class="cta-detail">
+      <div class="cta-detail-label">Location</div>
+      <div class="cta-detail-value" style="font-size:1rem;font-family:var(--ff-body);font-weight:300;color:var(--gray-lt);line-height:1.6">6128 Brookshire Blvd Suite F<br>Charlotte, NC 28216</div>
     </div>
-  </section>
-
-  <div class="cta-banner">
-    <div class="cta-banner-inner">
-      <div class="cta-carbon"></div>
-      <h2>Ready to Book?</h2>
-      <p>Call or text Malik directly for your custom quote. Fast response, extended hours, no waiting.</p>
-      <div class="cta-btns">
-        <button class="btn-gold" onclick="showPage('contact')">Book a Service ✦</button>
-        <a href="tel:9192700371" class="btn-ghost">📞 919-270-0371</a>
-      </div>
+    <div class="cta-divider"></div>
+    <div class="cta-detail">
+      <div class="cta-detail-label">Hours</div>
+      <div class="cta-detail-value" style="font-size:.9rem;font-family:var(--ff-body);font-weight:300;color:var(--gray-lt)">Monday – Sunday · 8AM – 9PM</div>
     </div>
   </div>
+</section>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <img src="https://static.wixstatic.com/media/f9c684_6cced2cf81c744149a9a068015303ec9~mv2.png/v1/fill/w_209,h_209,al_c,q_85,enc_avif/TNG-LogoGoldText-WHITE.png" alt="TNG" class="footer-logo">
-        <p class="footer-tagline">Raleigh's most trusted automotive restyling studio.</p>
-        <a href="https://www.instagram.com/tintnationgurus/" target="_blank" class="footer-social">Instagram</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Pages</div>
-        <ul class="footer-links">
-          <li><button onclick="showPage('home')">Home</button></li>
-          <li><button onclick="showPage('services')">Services</button></li>
-          <li><button onclick="showPage('about')">About</button></li>
-          <li><button onclick="showPage('contact')">Contact</button></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Contact</div>
-        <ul class="footer-links">
-          <li><a href="tel:9192700371">919-270-0371</a></li>
-          <li><span>1819 E. Millbrook Rd, Raleigh NC</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom"><span>© 2025 Tint Nation Gurus · Raleigh, NC</span></div>
-  </footer>
-
-</div>
-
-<!-- ═══════════ CONTACT ═══════════ -->
-<div id="page-contact" class="page">
-
-  <div class="page-hero">
-    <div class="page-hero-carbon"></div>
-    <div class="page-hero-content">
-      <div class="section-tag">Book a Service</div>
-      <h1 class="page-h1">Let's Build<br><em>Your Vision.</em></h1>
-      <p class="page-sub">Call or text Malik directly for the fastest response. Or fill out the form below and we'll get back to you with a custom quote.</p>
-    </div>
-    <div class="page-hero-stripe"></div>
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">TINT <b>NATION</b> GURUS</a>
+  <div class="footer-copy">© 2025 Tint Nation Gurus · All Rights Reserved</div>
+  <div class="footer-links">
+    <a href="https://instagram.com/tintnationgurus" target="_blank">Instagram</a>
+    <a href="#services">Services</a>
+    <a href="#academy">Academy</a>
+    <a href="#contact">Contact</a>
   </div>
+</footer>
 
-  <section class="contact-section">
-    <div class="contact-grid">
-      <div class="contact-left">
-        <h2>Get In <em>Touch.</em></h2>
-        <p>Every vehicle is different — we build custom quotes based on your exact make, model, and goals. Reach out and let's talk.</p>
-        <div class="contact-cards">
-          <a href="tel:9192700371" class="ccard ccard-featured">
-            <div class="cc-icon">📞</div>
-            <div>
-              <div class="cc-label">Call or Text Malik</div>
-              <div class="cc-val">919-270-0371</div>
-              <div class="cc-sub">Fastest way to get a quote</div>
-            </div>
-          </a>
-          <div class="ccard">
-            <div class="cc-icon">📍</div>
-            <div>
-              <div class="cc-label">Location</div>
-              <div class="cc-val">1819 E. Millbrook Road<br>Raleigh, NC 27609</div>
-            </div>
-          </div>
-          <div class="ccard">
-            <div class="cc-icon">🕐</div>
-            <div>
-              <div class="cc-label">Hours</div>
-              <div class="cc-val">Mon – Sun: 8AM – 9PM</div>
-            </div>
-          </div>
-          <a href="https://www.instagram.com/tintnationgurus/" target="_blank" class="ccard">
-            <div class="cc-icon">📸</div>
-            <div>
-              <div class="cc-label">Instagram</div>
-              <div class="cc-val">@tintnationgurus</div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="contact-form-card">
-        <h3>Request a Custom Quote</h3>
-        <form id="contact-form" onsubmit="handleContactSubmit(event)">
-          <div class="form-row">
-            <div class="form-group">
-              <label>First Name</label>
-              <input type="text" name="first_name" placeholder="Jordan" required>
-            </div>
-            <div class="form-group">
-              <label>Last Name</label>
-              <input type="text" name="last_name" placeholder="Smith" required>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Phone</label>
-            <input type="tel" name="phone" placeholder="(919) 000-0000" required>
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" placeholder="jordan@email.com" required>
-          </div>
-          <div class="form-group">
-            <label>What service are you requesting?</label>
-            <select name="service">
-              <option value="">Select a service...</option>
-              <option>Window Tint</option>
-              <option>Ceramic Coating</option>
-              <option>Vehicle Wraps</option>
-              <option>Paint Protection Film</option>
-              <option>Custom Lighting</option>
-              <option>Buffing / Polish</option>
-              <option>Multiple Services / Bundle</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Vehicle Year / Make / Model</label>
-            <input type="text" name="vehicle" placeholder="e.g. 2022 Honda Accord — or N/A if not an auto service" required>
-          </div>
-          <div class="form-group">
-            <label>Provide a description of the services needed</label>
-            <textarea name="message" placeholder="Any specific details about your vehicle, what you're looking for, timeline, or questions..."></textarea>
-          </div>
-          <button type="submit" class="btn-gold form-btn">Send Request ✦</button>
-          <div id="contact-success" class="form-success" style="display:none">✦ Request sent! Malik will be in touch with your custom quote shortly.</div>
-        </form>
-      </div>
-    </div>
-  </section>
+<script>
+window.addEventListener('load', () => {
+  if(typeof Motion === 'undefined') return;
+  const { animate, inView, spring } = Motion;
 
-  <!-- MAP -->
-  <div class="map-wrap">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3232.5!2d-78.6382!3d35.8385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89ac5a2f8b2c0001%3A0x0!2s1819+E+Millbrook+Rd%2C+Raleigh%2C+NC+27609!5e0!3m2!1sen!2sus!4v1600000000000" width="100%" height="360" style="border:0" allowfullscreen loading="lazy" title="Tint Nation Gurus Location"></iframe>
-  </div>
+  // Cursor
+  const cur = document.getElementById('cur');
+  document.addEventListener('mousemove', e => {
+    cur.style.left = e.clientX + 'px';
+    cur.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a,button,.svc-row,.review,.stat-item').forEach(el => {
+    el.addEventListener('mouseenter', () => cur.classList.add('big'));
+    el.addEventListener('mouseleave', () => cur.classList.remove('big'));
+  });
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <img src="https://static.wixstatic.com/media/f9c684_6cced2cf81c744149a9a068015303ec9~mv2.png/v1/fill/w_209,h_209,al_c,q_85,enc_avif/TNG-LogoGoldText-WHITE.png" alt="TNG" class="footer-logo">
-        <p class="footer-tagline">Raleigh's most trusted automotive restyling studio.</p>
-        <a href="https://www.instagram.com/tintnationgurus/" target="_blank" class="footer-social">Instagram</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Pages</div>
-        <ul class="footer-links">
-          <li><button onclick="showPage('home')">Home</button></li>
-          <li><button onclick="showPage('services')">Services</button></li>
-          <li><button onclick="showPage('about')">About</button></li>
-          <li><button onclick="showPage('contact')">Contact</button></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Contact</div>
-        <ul class="footer-links">
-          <li><a href="tel:9192700371">919-270-0371</a></li>
-          <li><span>1819 E. Millbrook Rd</span></li>
-          <li><span>Raleigh, NC 27609</span></li>
-          <li><span>Mon–Sun: 8am–9pm</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Tint Nation Gurus · Raleigh, NC</span>
-      <span>Fast · Friendly · Top Quality</span>
-    </div>
-  </footer>
+  // Hero
+  animate('#heroLeft', { opacity:[0,1], x:[-20,0] },
+    { duration:.9, ease:[.25,.1,.25,1], delay:.15 });
+  animate('#heroImg', { opacity:[0,1] },
+    { duration:1.2, ease:'ease-out', delay:.3 });
+  animate('#heroStrip .hs-item', { opacity:[0,1], y:[10,0] },
+    { duration:.5, delay:Motion.stagger(.1,.5), ease:[.25,.1,.25,1] });
 
-</div>
+  // Nav on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    animate(nav, {
+      boxShadow: window.scrollY > 20
+        ? '0 1px 24px rgba(0,0,0,.7)'
+        : '0 0 0 rgba(0,0,0,0)'
+    }, { duration:.3 });
+  }, { passive:true });
 
-<!-- Sticky buttons -->
-<a href="tel:9192700371" class="phone-sticky">📞 Call Malik</a>
-<a href="sms:9192700371" class="sms-sticky">🚗 Text Us</a>
+  // Services rows — slide in from left
+  inView('#svcList', () => {
+    animate('#svcList .svc-row',
+      { opacity:[0,1], x:[-16,0] },
+      { duration:.55, delay:Motion.stagger(.1), ease:[.25,.1,.25,1] }
+    );
+  }, { amount:.15 });
 
-<script src="tng-main.js"></script>
+  // Stats counter feel
+  inView('#statsRow', () => {
+    animate('#statsRow .stat-item',
+      { opacity:[0,1], y:[12,0] },
+      { duration:.5, delay:Motion.stagger(.08), ease:[.25,.1,.25,1] }
+    );
+  }, { amount:.4 });
+
+  // Academy
+  inView('#academyContent', () => {
+    animate('#academyContent',
+      { opacity:[0,1], x:[-20,0] },
+      { duration:.7, ease:[.25,.1,.25,1] }
+    );
+  }, { amount:.3 });
+
+  // Reviews
+  inView('#reviewsLayout', () => {
+    animate('#reviewsLayout .review',
+      { opacity:[0,1], y:[16,0] },
+      { duration:.6, delay:Motion.stagger(.1), ease:[.25,.1,.25,1] }
+    );
+  }, { amount:.2 });
+
+  // Service row hover
+  document.querySelectorAll('.svc-row').forEach(row => {
+    row.addEventListener('mouseenter', () => {
+      animate(row.querySelector('.svc-row-num'), { color:'rgba(245,196,0,.25)' }, { duration:.2 });
+    });
+    row.addEventListener('mouseleave', () => {
+      animate(row.querySelector('.svc-row-num'), { color:'rgba(245,196,0,.08)' }, { duration:.2 });
+    });
+  });
+
+  // Button spring
+  document.querySelectorAll('.btn-y,.btn-ghost,.btn-dark,.btn-y-sm,.nav-cta').forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      animate(btn, { scale:1.03 }, { type:spring, stiffness:400, damping:28 });
+    });
+    btn.addEventListener('mouseleave', () => {
+      animate(btn, { scale:1 }, { type:spring, stiffness:350, damping:30 });
+    });
+  });
+});
+</script>
 </body>
 </html>
